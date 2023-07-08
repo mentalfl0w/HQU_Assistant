@@ -1,0 +1,6 @@
+[submodule "3rdparty/FluentUI"]
+	path = 3rdparty/FluentUI
+	url = git@github.com:mentalfl0w/FluentUI.git
+[submodule "3rdparty/framelesshelper"]
+	path = 3rdparty/framelesshelper
+	url = https://git.ourdocs.cn/Mentalflow/framelesshelper.git
