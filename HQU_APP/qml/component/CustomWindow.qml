@@ -1,7 +1,7 @@
-﻿import QtQuick
-import QtQuick.Layouts
-import FluentUI
-import org.wangwenx190.FramelessHelper
+﻿import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import FluentUI 1.0
+import org.wangwenx190.FramelessHelper 1.0
 
 FluWindow {
 

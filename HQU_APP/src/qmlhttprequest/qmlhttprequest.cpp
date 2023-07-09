@@ -12,8 +12,8 @@ namespace qhr {
 #if QT_VERSION_MAJOR == 5
 void QmlHttpRequest::registerQmlHttpRequest()
 {
-    qmlRegisterSingletonType<QmlHttpRequest>(PROJECT_NAME,
-        PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, "QmlHttpRequest",
+    qmlRegisterSingletonType<QmlHttpRequest>("QmlHttpRequest",
+        1, 0, "QmlHttpRequest",
         [](QQmlEngine* engine, QJSEngine* script) -> QmlHttpRequest* {
             if (auto engineNam = engine->networkAccessManager()) {
                 auto instance = new QmlHttpRequest(engineNam);
@@ -25,7 +25,7 @@ void QmlHttpRequest::registerQmlHttpRequest()
             return nullptr;
         });
     qmlRegisterUncreatableType<qhr::Request>("QmlHttpRequest",
-        PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, "Request",
+        1, 0, "Request",
         "Request can not be created from QML");
 }
 #endif

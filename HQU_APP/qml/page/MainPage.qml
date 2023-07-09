@@ -1,9 +1,9 @@
-import QtQuick
-import QtQuick.Window
-import QtQuick.Controls
-import QtQuick.Layouts
-import Qt.labs.platform
-import FluentUI
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
+import Qt.labs.platform 1.0
+import FluentUI 1.0
 import "../global/"
 import "qrc:/HQU_Assistant/qml/fjsjyt/global/"
 import "qrc:/HQU_Assistant/qml/hqu/global/"
@@ -50,7 +50,7 @@ CustomWindow {
         menu: Menu {
             MenuItem {
                 text: "显示"
-                icon.source: FluentIcons.DeviceLaptopNoPic
+                iconSource: FluentIcons.DeviceLaptopNoPic
                 onTriggered: {
                     rootwindow.show()
                     rootwindow.raise()
@@ -61,7 +61,7 @@ CustomWindow {
 
             MenuItem {
                 text: "退出"
-                icon.source: FluentIcons.PowerButton
+                iconSource: FluentIcons.PowerButton
                 onTriggered: {
                     rootwindow.deleteWindow()
                     FluApp.closeApp()
@@ -75,7 +75,7 @@ CustomWindow {
             rootwindow.requestActivate()
         }
 
-        icon.source: "qrc:/HQU_Assistant/res/image/logo.png"
+        iconSource: "qrc:/HQU_Assistant/res/image/logo.png"
 
         onActivated:
             (reason)=>{

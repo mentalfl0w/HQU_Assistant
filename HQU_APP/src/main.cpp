@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     });
     context->setContextProperty("appInfo",appInfo);
     qmlRegisterType<FileIO>("FileIO",1,0,"FileIO");
-    qmlRegisterSingletonType<qhr::QmlHttpRequest>("QmlHttpRequest", 1,0, "QmlHttpRequest", qhr::QmlHttpRequest::create);
+    qhr::QmlHttpRequest::registerQmlHttpRequest();
     const QUrl url(QStringLiteral("qrc:/HQU_Assistant/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

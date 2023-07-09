@@ -1,12 +1,12 @@
-﻿import QtQuick
-import QtQuick.Layouts
-import QtQuick.Window
-import QtQuick.Controls
+﻿import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 import "qrc:/HQU_Assistant/qml/global/"
 import "qrc:/HQU_Assistant/qml/hqu/uni_platform/component"
 import "qrc:/HQU_Assistant/qml/hqu/global"
 import "qrc:/HQU_Assistant/qml/fjsjyt/global"
-import FluentUI
+import FluentUI 1.0
 
 FluScrollablePage{
     id:home

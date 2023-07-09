@@ -68,7 +68,7 @@ void Request::open(const QString& method, const QUrl& url)
     } else if (mMethodName.compare("PATCH", Qt::CaseInsensitive) == 0) {
         mMethod = Method::PATCH;
     } else if (mMethodName.compare("DELETE", Qt::CaseInsensitive) == 0) {
-        mMethod = Method::DELETE;
+        mMethod = Method::R_DELETE;
     } else {
         mMethod = Method::CUSTOM;
     }
@@ -126,7 +126,7 @@ void Request::send(const QVariant& body)
         case Method::POST:
         case Method::PUT:
         case Method::PATCH:
-        case Method::DELETE:
+        case Method::R_DELETE:
             sendBodyRequest(body);
             break;
         case Method::CUSTOM:
@@ -268,7 +268,7 @@ void Request::sendBodyRequest(const QVariant& body)
         case Method::POST:
         case Method::PUT:
         case Method::PATCH:
-        case Method::DELETE:
+        case Method::R_DELETE:
         case Method::CUSTOM: {
             QByteArray contentType
                 = mNRequest.header(QNetworkRequest::ContentTypeHeader)

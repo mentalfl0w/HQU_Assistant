@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
-
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum OS X deployment version")
 
 project(HQU_Assistant VERSION 1.0.0 LANGUAGES CXX)
@@ -15,13 +16,6 @@ endif()
 
 add_definitions(-DHQUA_VERSION=1,0,0,5)
 
-#配置通用编译
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-if(APPLE)
-    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "[macOS]: Universal Build." FORCE)
-endif()
-
 #设置可执行文件输出目录
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/app/debug)
@@ -32,7 +26,13 @@ endif()
 #获取文件路径分隔符（解决执行命令的时候有些平台会报错）
 file(TO_CMAKE_PATH "/" PATH_SEPARATOR)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Quick)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #遍历所有Cpp文件
 include_directories(include include/fileio include/language include/qmlhttprequest)
@@ -59,7 +59,7 @@ endforeach(filepath)
 #添加可执行文件
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/res/icon.rc")
-    qt_add_executable(${PROJECT_NAME}
+    add_executable(${PROJECT_NAME}
         ${sources_files}
         "${CMAKE_CURRENT_SOURCE_DIR}/res/icon.rc"
     )
@@ -67,12 +67,12 @@ elseif(APPLE)
     set(MACOSX_BUNDLE_ICON_FILE AppIcon)
     set(App_ICON "${CMAKE_CURRENT_SOURCE_DIR}/res/image/AppIcon.icns")
     set_source_files_properties(${App_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-    qt_add_executable(${PROJECT_NAME}
+    add_executable(${PROJECT_NAME}
         ${sources_files}
         ${App_ICON}
     )
 else ()
-    qt_add_executable(${PROJECT_NAME}
+    add_executable(${PROJECT_NAME}
         ${sources_files}
     )
 endif ()
@@ -93,13 +93,8 @@ if(WIN32)
     )
 endif()
 
-#添加qml模块
-qt_add_qml_module(${PROJECT_NAME}
-    URI ${PROJECT_NAME}
-    VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    QML_FILES ${qml_files}
-    RESOURCES ${resource_files}
-)
+#设置编译对象
+target_sources(${PROJECT_NAME} PRIVATE hqua.qrc)
 
 #设置属性
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -115,7 +110,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 #链接库
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Quick
+    Qt5::Quick
     fluentuiplugin
     FramelessHelper::Core
     FramelessHelper::Quick

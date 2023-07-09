@@ -1,11 +1,10 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Controls.Basic
-import Qt.labs.platform
-import QtQuick.Layouts
-import QtQuick.Window
-import FluentUI
-import FileIO
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import Qt.labs.platform 1.0
+import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
+import FluentUI 1.0
+import FileIO 1.0
 import "../../global/network"
 import "../global"
 

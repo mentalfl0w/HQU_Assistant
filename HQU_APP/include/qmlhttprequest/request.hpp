@@ -29,7 +29,6 @@
 #include <QQmlEngine>
 #include <QSharedPointer>
 
-#include "qmlhttprequest_global.hpp"
 #include "response.hpp"
 
 class QNetworkAccessManager;
@@ -38,7 +37,7 @@ class QHttpMultiPart;
 
 namespace qhr {
 
-class QHR_EXPORT Request : public QObject
+class Request : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -72,7 +71,7 @@ public:
         POST,
         PUT,
         PATCH,
-        DELETE,
+        R_DELETE,
         CUSTOM,
     };
 

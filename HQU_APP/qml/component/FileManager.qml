@@ -1,6 +1,6 @@
-import QtQuick
-import FluentUI
-import FileIO
+import QtQuick 2.12
+import FluentUI 1.0
+import FileIO 1.0
 
 FluItem {
 
