@@ -3,16 +3,14 @@ on:
   push:
     paths:
       - '*.txt'
-      - 'src/**'
-      - 'qml/**'
-      - 'include/**'
+      - 'HQU_APP/**'
+      - 'scripts/**'
       - '.github/workflows/macos.yml'
   pull_request:
     paths:
       - '*.txt'
-      - 'src/**'
-      - 'qml/**'
-      - 'include/**'
+      - 'HQU_APP/**'
+      - 'scripts/**'
       - '.github/workflows/macos.yml' 
       
 jobs:
@@ -56,7 +54,7 @@ jobs:
       - name: package
         run: |
           # 拷贝依赖
-          macdeployqt app/release/${targetName}.app -qmldir=. -verbose=1 -dmg     
+          macdeployqt app/release/${targetName}.app -qmldir=./ -dmg     
           
       - uses: actions/upload-artifact@v2
         with:

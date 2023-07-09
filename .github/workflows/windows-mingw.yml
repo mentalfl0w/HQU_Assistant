@@ -3,17 +3,13 @@ on:
   push:
     paths:
       - '*.txt'
-      - 'src/**'
-      - 'qml/**'
-      - 'include/**'
+      - 'HQU_APP/**'
       - 'scripts/**'
       - '.github/workflows/windows-mingw.yml'
   pull_request:
     paths:
       - '*.txt'
-      - 'src/**'
-      - 'qml/**'
-      - 'include/**'
+      - 'HQU_APP/**'
       - 'scripts/**'
       - '.github/workflows/windows-mingw.yml'
       
