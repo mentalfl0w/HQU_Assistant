@@ -12,7 +12,7 @@ AppInfo::AppInfo(QObject *parent)
     : QObject{parent}
 {
     version(VER_STR);
-    changeLang("Zh");
+    lang(new Zh());
 }
 
 void AppInfo::changeLang(const QString& locale){
