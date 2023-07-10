@@ -12,7 +12,9 @@
 #include "fileio.h"
 
 FRAMELESSHELPER_USE_NAMESPACE
-
+#ifdef FLUENTUI_BUILD_STATIC_LIB
+Q_IMPORT_PLUGIN(FluentUIPlugin)
+#endif
 int main(int argc, char *argv[])
 {
     //将样式设置为Basic，不然会导致组件显示异常
@@ -45,6 +47,9 @@ int main(int argc, char *argv[])
         context->setContextProperty("lang",appInfo->lang());
     });
     context->setContextProperty("appInfo",appInfo);
+#ifdef FLUENTUI_BUILD_STATIC_LIB
+    engine.addImportPath("qrc:/"); // 让静态资源可以被QML引擎搜索到
+#endif
     qmlRegisterType<FileIO>("FileIO",1,0,"FileIO");
     qmlRegisterSingletonType<qhr::QmlHttpRequest>("QmlHttpRequest", 1,0, "QmlHttpRequest", qhr::QmlHttpRequest::create);
     const QUrl url(QStringLiteral("qrc:/HQU_Assistant/qml/main.qml"));

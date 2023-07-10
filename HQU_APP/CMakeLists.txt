@@ -22,6 +22,11 @@ if(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "[macOS]: Universal Build." FORCE)
 endif()
 
+#判断FluentUI库类型
+if(FLUENTUI_BUILD_STATIC_LIB)
+    add_definitions(-DFLUENTUI_BUILD_STATIC_LIB)
+endif()
+
 #设置可执行文件输出目录
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/app/debug)
@@ -114,13 +119,22 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 #链接库
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Quick
-    fluentui
-    fluentuiplugin
-    FramelessHelper::Core
-    FramelessHelper::Quick
-)
+if(FLUENTUI_BUILD_STATIC_LIB)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        Qt6::Quick
+        fluentui
+        fluentuiplugin
+        FramelessHelper::Core
+        FramelessHelper::Quick
+    )
+else()
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        Qt6::Quick
+        fluentuiplugin
+        FramelessHelper::Core
+        FramelessHelper::Quick
+    )
+endif()
 
 #安装
 install(TARGETS ${PROJECT_NAME}
