@@ -6,13 +6,16 @@
 #include <QProcess>
 #include <FramelessHelper/Quick/framelessquickmodule.h>
 #include <FramelessHelper/Core/private/framelessconfig_p.h>
+#include <QQmlExtensionPlugin>
 #include "language/Lang.h"
 #include "AppInfo.h"
 #include "qmlhttprequest.hpp"
 #include "fileio.h"
 
 FRAMELESSHELPER_USE_NAMESPACE
-
+#ifdef FLUENTUI_BUILD_STATIC_LIB
+Q_IMPORT_PLUGIN(FluentUIPlugin)
+#endif
 int main(int argc, char *argv[])
 {
     //将样式设置为Basic，不然会导致组件显示异常
@@ -46,6 +49,10 @@ int main(int argc, char *argv[])
     });
     context->setContextProperty("appInfo",appInfo);
     qmlRegisterType<FileIO>("FileIO",1,0,"FileIO");
+#ifdef FLUENTUI_BUILD_STATIC_LIB
+    qobject_cast<QQmlExtensionPlugin*>(qt_static_plugin_FluentUIPlugin().instance())->initializeEngine(&engine, "FluentUI");
+    //qobject_cast<QQmlExtensionPlugin*>(qt_static_plugin_FluentUIPlugin().instance())->registerTypes("FluentUI");
+#endif
     qhr::QmlHttpRequest::registerQmlHttpRequest();
     const QUrl url(QStringLiteral("qrc:/HQU_Assistant/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

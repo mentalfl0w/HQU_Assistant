@@ -16,6 +16,10 @@ endif()
 
 add_definitions(-DHQUA_VERSION=1,0,0,5)
 
+if(FLUENTUI_BUILD_STATIC_LIB)
+    add_definitions(-DFLUENTUI_BUILD_STATIC_LIB=1)
+endif()
+
 #设置可执行文件输出目录
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/app/debug)
