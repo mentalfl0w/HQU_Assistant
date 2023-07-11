@@ -37,7 +37,7 @@ endif()
 #获取文件路径分隔符（解决执行命令的时候有些平台会报错）
 file(TO_CMAKE_PATH "/" PATH_SEPARATOR)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat Svg REQUIRED)
 
 #遍历所有Cpp文件
 include_directories(include include/fileio include/language include/qmlhttprequest)
@@ -122,6 +122,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 if(FLUENTUI_BUILD_STATIC_LIB)
     target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Core5Compat
+        Qt6::Svg
         Qt6::Quick
         fluentui
         fluentuiplugin
@@ -131,6 +132,7 @@ if(FLUENTUI_BUILD_STATIC_LIB)
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Core5Compat
+        Qt6::Svg
         Qt6::Quick
         fluentuiplugin
         FramelessHelper::Core
