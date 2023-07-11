@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-11.0]
+        os: [macos-12]
         qt_ver: [5.15.2]
         qt_arch: [clang_64]
     env:
@@ -31,15 +31,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      
-      # macos 11.0 默认环境变了,要指定
-      - name: prepare env
-        if: ${{ matrix.os == 'macos-11.0' }}
-        run: |
-          softwareupdate --all --install --force
-          sudo xcode-select --print-path
-          sudo xcode-select --switch /Library/Developer/CommandLineTools
-      
+          
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -57,25 +49,25 @@ jobs:
           cmake --version
           mkdir build
           cd build
-          cmake -DCMAKE_MESSAGE_LOG_LEVEL=STATUS -DCMAKE_PREFIX_PATH=/Users/runner/work/FluentUI/Qt/5.15.2/clang_64 -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -GNinja ..
+          cmake -DCMAKE_MESSAGE_LOG_LEVEL=STATUS -DCMAKE_PREFIX_PATH=/Users/runner/work/FluentUI/Qt/5.15.2/macos -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -GNinja ..
           cmake --build . --target all --config Release --parallel
           
       - name: package
         run: |
           # 拷贝依赖
-          macdeployqt app/release/${targetName}.app -qmldir=./ -dmg     
+          macdeployqt app/release/${targetName}.app -qmldir=. -verbose=1 -dmg     
           
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}}.zip
-          path: bin/release/${{ env.targetName }}.app
+          path: app/release/${{ env.targetName }}.app
           
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: bin/release/${{ env.targetName }}.dmg
+          file: app/release/${{ env.targetName }}.dmg
           asset_name: ${{ env.targetName }}_${{  github.ref_name }}_${{ matrix.os }}_Qt${{ matrix.qt_ver }}.dmg
           tag: ${{ github.ref }}
           overwrite: true

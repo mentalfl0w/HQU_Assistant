@@ -30,7 +30,7 @@ endif()
 #获取文件路径分隔符（解决执行命令的时候有些平台会报错）
 file(TO_CMAKE_PATH "/" PATH_SEPARATOR)
 
-find_package(Qt5 REQUIRED COMPONENTS Quick)
+find_package(Qt5 REQUIRED COMPONENTS Quick Svg)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -115,6 +115,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 #链接库
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt5::Quick
+    Qt5::Svg
     fluentuiplugin
     FramelessHelper::Core
     FramelessHelper::Quick
