@@ -17,6 +17,8 @@ public:
     Q_INVOKABLE void write();
     Q_INVOKABLE QByteArray toBase64(QByteArray btr);
     Q_INVOKABLE QByteArray fromBase64(QByteArray btr);
+    Q_INVOKABLE QString GetCorrectUnicode(const QByteArray &ba);
+    Q_INVOKABLE QString GetCorrectUnicode(const QString &ba);
     QString source() const;
     QByteArray content() const;
 public slots:
