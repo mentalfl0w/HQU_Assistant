@@ -78,21 +78,20 @@ FluObject{
                 showZero: false
             }
             onTap:{
-                if(navigationView.getCurrentUrl()==="qrc:/HQU_Assistant/qml/fjsjyt/"+ (FluTools.qtMajor() === 6 ? "file_new.qml" : "file.qml") &&
-                   FJSJYTInfo.is_readed === false)
+                if(navigationView.getCurrentUrl()==="qrc:/HQU_Assistant/qml/fjsjyt/file_new.qml" && FJSJYTInfo.is_readed === false)
                     return
                 FJSJYTInfo.is_readed = false
-                navigationView.push("qrc:/HQU_Assistant/qml/fjsjyt/"+ (FluTools.qtMajor() === 6 ? "file_new.qml" : "file.qml"))
+                navigationView.push("qrc:/HQU_Assistant/qml/fjsjyt/file_new.qml")
             }
         }
         FluPaneItem{
             title:"已收文件"
             onTap:{
-                if(navigationView.getCurrentUrl()==="qrc:/HQU_Assistant/qml/fjsjyt/"+ (FluTools.qtMajor() === 6 ? "file_new.qml" : "file.qml") &&
+                if(navigationView.getCurrentUrl()==="qrc:/HQU_Assistant/qml/fjsjyt/file_new.qml" &&
                    FJSJYTInfo.is_readed === true)
                     return
                 FJSJYTInfo.is_readed = true
-                navigationView.push("qrc:/HQU_Assistant/qml/fjsjyt/"+(FluTools.qtMajor() === 6 ? "file_new.qml" : "file.qml"))
+                navigationView.push("qrc:/HQU_Assistant/qml/fjsjyt/file_new.qml")
             }
         }
     }
