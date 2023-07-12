@@ -44,7 +44,7 @@ CustomWindow {
         tab_view.appendTab(
                     'qrc:/HQU_Assistant/res/image/logo.png',
                     title,
-                    Qt.createComponent(page_url),
+                    Qt.createComponent(page_url, tab_view),
                     argument)
     }
 
