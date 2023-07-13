@@ -10,6 +10,7 @@
 #include "AppInfo.h"
 #include "qmlhttprequest.hpp"
 #include "fileio.h"
+#include "config.h"
 
 FRAMELESSHELPER_USE_NAMESPACE
 #ifdef FLUENTUI_BUILD_STATIC_LIB
@@ -51,6 +52,12 @@ int main(int argc, char *argv[])
     engine.addImportPath("qrc:/"); // 让静态资源可以被QML引擎搜索到
 #endif
     qmlRegisterType<FileIO>("FileIO",1,0,"FileIO");
+    qmlRegisterSingletonType<Config>("Config",1,0,"Config", [=](QQmlEngine* qmlEngine, QJSEngine* jsEngine)->Config*{
+        Q_UNUSED(qmlEngine)
+        Q_UNUSED(jsEngine)
+        Config* instance = new Config();
+        return instance;
+    });
     qmlRegisterSingletonType<qhr::QmlHttpRequest>("QmlHttpRequest", 1,0, "QmlHttpRequest", qhr::QmlHttpRequest::create);
     const QUrl url(QStringLiteral("qrc:/HQU_Assistant/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

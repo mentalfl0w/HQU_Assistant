@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Controls
 import FluentUI
+import Config
 import "qrc:/HQU_Assistant/qml/global/"
 
 FluScrollablePage{
@@ -13,8 +14,13 @@ FluScrollablePage{
     FluArea{
         Layout.fillWidth: true
         Layout.topMargin: 20
-        height: 270
+        height: 300
         paddings: 10
+
+        Component.onCompleted: {
+
+
+        }
 
         ColumnLayout{
             spacing: 10
@@ -28,18 +34,25 @@ FluScrollablePage{
                 Layout.bottomMargin: 4
             }
             Repeater{
+                id: darkmode_repeater
                 model: [{title:"System",mode:FluDarkMode.System},{title:"Light",mode:FluDarkMode.Light},{title:"Dark",mode:FluDarkMode.Dark}]
                 delegate:  FluRadioButton{
                     checked : FluTheme.darkMode === modelData.mode
                     text:modelData.title
                     clickListener:function(){
                         FluTheme.darkMode = modelData.mode
+                        Config.set("app_settings", "darkmode", FluTheme.darkMode)
                     }
                 }
             }
 
             ColumnLayout{
                 spacing:0
+                FluText{
+                    Layout.topMargin: 10
+                    text:lang.style_color
+                    font:  FluTextStyle.BodyStrong
+                }
                 RowLayout{
                     Layout.topMargin: 10
                     Repeater{
@@ -62,6 +75,7 @@ FluScrollablePage{
                                 hoverEnabled: true
                                 onClicked: {
                                     FluTheme.primaryColor = modelData
+                                    Config.set("app_settings","style_color",modelData.normal)
                                 }
                             }
                         }
@@ -76,6 +90,7 @@ FluScrollablePage{
                     checked: FluTheme.nativeText
                     onClicked: {
                         FluTheme.nativeText = !FluTheme.nativeText
+                        Config.set("app_settings","native_text",FluTheme.nativeText)
                     }
                 }
             }
@@ -110,6 +125,7 @@ FluScrollablePage{
                     text:modelData.title
                     clickListener:function(){
                         MainEvent.displayMode = modelData.mode
+                        Config.set("app_settings","nav_mode",modelData.mode)
                     }
                 }
             }
@@ -146,6 +162,7 @@ FluScrollablePage{
                         clickListener:function(){
                             console.debug(modelData)
                             appInfo.changeLang(modelData)
+                            Config.set("app_settings","language",modelData)
                         }
                     }
                 }

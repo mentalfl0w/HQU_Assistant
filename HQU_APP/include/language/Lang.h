@@ -9,12 +9,13 @@ class Lang : public QObject
     Q_OBJECT
     Q_PROPERTY_AUTO(QString,home);
     Q_PROPERTY_AUTO(QString,fjsjyt);
-    Q_PROPERTY_AUTO(QString,hquoa);
+    Q_PROPERTY_AUTO(QString,hquoa_common);
     Q_PROPERTY_AUTO(QString,hquid);
     Q_PROPERTY_AUTO(QString,popus);
     Q_PROPERTY_AUTO(QString,navigation);
     Q_PROPERTY_AUTO(QString,theming);
     Q_PROPERTY_AUTO(QString,media);
+    Q_PROPERTY_AUTO(QString,style_color);
     Q_PROPERTY_AUTO(QString,dark_mode);
     Q_PROPERTY_AUTO(QString,search);
     Q_PROPERTY_AUTO(QString,about);

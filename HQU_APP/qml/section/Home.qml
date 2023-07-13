@@ -13,19 +13,29 @@ FluScrollablePage{
 
     launchMode: FluPage.SingleTask
 
+    Component.onDestruction: {
+        HQUPlatformInfo.priority = -1
+        FJSJYTInfo.priority = -1
+    }
+
+    Component.onCompleted: {
+        hqu_connect.onNeed_update_userInfo()
+        fjsjyt_connect.onNeed_update_userInfo()
+    }
+
     ListModel{
         id:model_header
         ListElement{
             icon:"qrc:/HQU_Assistant/res/image/logo.png"
             title:"HQU助手"
             desc:"一个基于微软FluentUI设计的办公辅助软件。"
-            url:"https://git.ourdocs.cn"
+            url:"https://blog.ourdocs.cn/关于hqu助手/"
         }
         ListElement{
             icon:"qrc:/HQU_Assistant/res/image/help.png"
             title:"帮助"
             desc:"点击卡片查看帮助。"
-            url:"https://blog.ourdocs.cn"
+            url:"https://blog.ourdocs.cn/hqu助手操作指南/"
         }
         ListElement{
             icon:"qrc:/HQU_Assistant/res/svg/avatar_7.svg"
@@ -83,6 +93,7 @@ FluScrollablePage{
             }
             Connections
             {
+                id: hqu_connect
                 target: HQUPlatformInfo
                 function onNeed_update_userInfo(){
                     if (HQUPlatformInfo.is_login)
@@ -132,6 +143,7 @@ FluScrollablePage{
 
             Connections
             {
+                id: fjsjyt_connect
                 target: FJSJYTInfo
                 function onNeed_update_userInfo(){
                     if (FJSJYTInfo.is_login)

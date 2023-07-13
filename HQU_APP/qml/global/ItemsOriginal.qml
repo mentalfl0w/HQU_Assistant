@@ -1,4 +1,4 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import FluentUI
@@ -29,7 +29,7 @@ FluObject{
     }
 
     FluPaneItemExpander{
-        title:lang.hquoa
+        title:lang.hquoa_common
         icon:FluentIcons.FileExplorer
         FluPaneItem{
             title:"待办事宜"
@@ -39,13 +39,13 @@ FluObject{
                 color: 'green'
             }
             onTap:{
-                navigationView.push("qrc:/HQU_Assistant/qml/hquoa/unfinished.qml")
+                navigationView.push("qrc:/HQU_Assistant/qml/hqu/oa/unprocess_files.qml")
             }
         }
         FluPaneItem{
             title:"已办事宜"
             onTap:{
-                navigationView.push("qrc:/HQU_Assistant/qml/hquoa/finished.qml")
+                navigationView.push("qrc:/HQU_Assistant/qml/hqu/oa/processed_files.qml")
             }
         }
         FluPaneItem{
