@@ -11,6 +11,7 @@
 #include "AppInfo.h"
 #include "qmlhttprequest.hpp"
 #include "fileio.h"
+#include "config.h"
 
 FRAMELESSHELPER_USE_NAMESPACE
 #ifdef FLUENTUI_BUILD_STATIC_LIB
@@ -53,6 +54,12 @@ int main(int argc, char *argv[])
     qobject_cast<QQmlExtensionPlugin*>(qt_static_plugin_FluentUIPlugin().instance())->initializeEngine(&engine, "FluentUI");
     //qobject_cast<QQmlExtensionPlugin*>(qt_static_plugin_FluentUIPlugin().instance())->registerTypes("FluentUI");
 #endif
+    qmlRegisterSingletonType<Config>("Config",1,0,"Config", [=](QQmlEngine* qmlEngine, QJSEngine* jsEngine)->Config*{
+        Q_UNUSED(qmlEngine)
+        Q_UNUSED(jsEngine)
+        Config* instance = new Config();
+        return instance;
+    });
     qhr::QmlHttpRequest::registerQmlHttpRequest();
     const QUrl url(QStringLiteral("qrc:/HQU_Assistant/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -1,9 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import Qt.labs.platform 1.0
 import FluentUI 1.0
+import Config 1.0
 import "../global/"
 import "qrc:/HQU_Assistant/qml/fjsjyt/global/"
 import "qrc:/HQU_Assistant/qml/hqu/global/"
@@ -41,6 +42,7 @@ CustomWindow {
         HQUPlatformInfo.root_window = rootwindow
         ItemsFooter.root_window = rootwindow
         tray.showMessage("欢迎", "欢迎使用HQU助手！",SystemTrayIcon.Information)
+        init_settings()
     }
 
     SystemTrayIcon {
@@ -134,7 +136,7 @@ CustomWindow {
             bottom: parent.bottom
         }
         z:999
-        pageMode: FluNavigationView.Stack
+        pageMode: FluNavigationView.NoStack
         items: ItemsOriginal
         footerItems:ItemsFooter
         topPadding:FluTools.isMacos() ? 20 : 5
@@ -198,5 +200,27 @@ CustomWindow {
     function close_popup()
     {
         window_popup.close()
+    }
+
+    function init_settings()
+    {
+        if (typeof(Config.get("app_settings","darkmode"))!=='undefined')
+            FluTheme.darkMode = Config.get("app_settings","darkmode")
+        if (typeof(Config.get("app_settings","style_color"))!=='undefined')
+        {
+            let colors = [FluColors.Yellow,FluColors.Orange,FluColors.Red,FluColors.Magenta,FluColors.Purple,FluColors.Blue,FluColors.Teal,FluColors.Green]
+            for (let i = 0;i<colors.length;i++)
+                if(colors[i].normal === Config.get("app_settings","style_color"))
+                {
+                    FluTheme.primaryColor = colors[i]
+                    break
+                }
+        }
+        if (typeof(Config.get("app_settings","native_text"))!=='undefined')
+            FluTheme.nativeText = Config.get("app_settings","native_text")==='true'
+        if (typeof(Config.get("app_settings","nav_mode"))!=='undefined')
+            MainEvent.displayMode = Config.get("app_settings","nav_mode")
+        if (typeof(Config.get("app_settings","language"))!=='undefined')
+            appInfo.changeLang(Config.get("app_settings","language"))
     }
 }

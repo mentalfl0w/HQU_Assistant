@@ -6,7 +6,7 @@ En::En(QObject *parent)
     setObjectName("En");
     home("Home");
     fjsjyt("Fujian EduDepartment");
-    hquoa("HQU OA");
+    hquoa_common("HQU OA - Common Used");
     hquid("HQU ID");
     popus("Popus");
     navigation("Navigation");
@@ -18,4 +18,5 @@ En::En(QObject *parent)
     settings("Settings");
     locale("Locale");
     navigation_view_display_mode("NavigationView Display Mode");
+    style_color("Style Color");
 }

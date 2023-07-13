@@ -150,5 +150,7 @@
         <file>res/image/logo.ico</file>
         <file>res/image/logo.png</file>
         <file>res/image/mask.png</file>
+        <file>qml/hqu/oa/processed_files.qml</file>
+        <file>qml/hqu/oa/unprocess_files.qml</file>
     </qresource>
 </RCC>

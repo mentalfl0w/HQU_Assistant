@@ -6,7 +6,7 @@ Zh::Zh(QObject *parent)
     setObjectName("Zh");
     home("首页");
     fjsjyt("福建省教育厅平台");
-    hquoa("HQU OA系统");
+    hquoa_common("HQU OA系统 - 常用功能");
     hquid("HQU 统一身份认证平台");
     popus("弹窗");
     navigation("导航");
@@ -18,4 +18,5 @@ Zh::Zh(QObject *parent)
     settings("设置");
     locale("语言环境");
     navigation_view_display_mode("导航视图显示模式");
+    style_color("主题颜色");
 }

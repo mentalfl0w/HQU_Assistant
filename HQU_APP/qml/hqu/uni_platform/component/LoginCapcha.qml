@@ -1,7 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
-import QtQuick.Window 2.12
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
 import FluentUI 1.0
 import FileIO 1.0
 
@@ -85,7 +85,7 @@ FluPopup{
                 Behavior on x {
                     NumberAnimation{
                         duration: 167
-                        easing.type: Easing.BezierSpline
+                        easing.type: Easing.Bezier
                         easing.bezierCurve: [ 0, 0, 0, 1 ]
                     }
                 }
